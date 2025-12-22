@@ -25,7 +25,22 @@
             </div>
 
             <!-- Settings Dropdown -->
-            <div class="hidden sm:flex sm:items-center sm:ms-6">
+            <div class="hidden sm:flex sm:items-center sm:ms-6 gap-4">
+                <!-- Language Switcher -->
+                <div class="flex items-center gap-2 bg-gray-800/50 backdrop-blur-sm border border-gray-600 rounded-lg px-3 py-2">
+                    <svg class="w-4 h-4 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 5h12M9 3v2m1.048 9.5A18.022 18.022 0 016.412 9m6.088 9h7M11 21l5-10 5 10M12.751 5C11.783 10.77 8.07 15.61 3 18.129" />
+                    </svg>
+                    <a href="{{ route('language.switch', 'es') }}"
+                       class="text-sm font-medium transition-colors {{ app()->getLocale() === 'es' ? 'text-orange-400' : 'text-gray-400 hover:text-white' }}">
+                        ES
+                    </a>
+                    <span class="text-gray-600">|</span>
+                    <a href="{{ route('language.switch', 'en') }}"
+                       class="text-sm font-medium transition-colors {{ app()->getLocale() === 'en' ? 'text-orange-400' : 'text-gray-400 hover:text-white' }}">
+                        EN
+                    </a>
+                </div>
     <x-dropdown align="right" width="48">
         <x-slot name="trigger">
             <button class="group inline-flex items-center px-4 py-2 border border-gray-600 text-sm leading-4 font-medium rounded-lg text-gray-300 bg-gray-800/50 backdrop-blur-sm hover:text-white hover:border-orange-500/50 focus:outline-none focus:ring-2 focus:ring-orange-500/50 transition-all duration-300">
@@ -70,12 +85,12 @@
                         {{ __('Profile') }}
                     </x-dropdown-link>
 
-                  <x-dropdown-link :href="route('subscription.manage')" 
+                  <x-dropdown-link :href="route('subscription.manage')"
                     class="group flex items-center px-4 py-3 text-sm text-gray-300 hover:text-white hover:bg-orange-500/10 transition-colors duration-200">
                     <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 mr-3 text-gray-400 group-hover:text-orange-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 10h18M7 15h1m4 0h1m-7 4h12a3 3 0 003-3V8a3 3 0 00-3-3H6a3 3 0 00-3 3v8a3 3 0 003 3z" />
                     </svg>
-                    Mi suscripción
+                    {{ __('My subscription') }}
                 </x-dropdown-link>
 
                 <!-- Divider -->
