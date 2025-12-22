@@ -19,8 +19,6 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot(): void
     {
-        // Set locale based on session or default to 'es'
-        $locale = session('locale', config('app.fallback_locale', 'es'));
-        app()->setLocale($locale);
+        //
     }
 }
