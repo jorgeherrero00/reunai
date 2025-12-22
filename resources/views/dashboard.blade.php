@@ -35,13 +35,13 @@
             <div class="flex items-center justify-between">
                 <div>
                     <h1 class="text-3xl font-bold bg-gradient-to-r from-orange-400 to-red-500 bg-clip-text text-transparent">
-                        ¡Hola, {{ Auth::user()->name }}! 👋
+                        {{ __('Hello') }}, {{ Auth::user()->name }}! 👋
                     </h1>
-                    <p class="text-gray-400 mt-1">Aquí tienes un resumen de tu actividad reciente</p>
+                    <p class="text-gray-400 mt-1">{{ __('Here is a summary of your recent activity') }}</p>
                 </div>
                 <div class="hidden md:flex items-center space-x-4">
                     <div class="text-right">
-                        <p class="text-sm text-gray-400">Hoy es</p>
+                        <p class="text-sm text-gray-400">{{ __('Today is') }}</p>
                         <p class="font-medium text-white">{{ now()->locale('es')->translatedFormat('d M Y') }}</p>                    </div>
                 </div>
             </div>
@@ -53,7 +53,7 @@
             <div class="bg-gray-800/50 backdrop-blur-sm border border-gray-700/50 rounded-xl p-6 hover:border-orange-500/30 transition-all duration-300">
                 <div class="flex items-center justify-between">
                     <div>
-                        <p class="text-gray-400 text-sm">Total Reuniones</p>
+                        <p class="text-gray-400 text-sm">{{ __('Total Meetings') }}</p>
                         <p class="text-2xl font-bold text-white">{{ auth()->user()->meetings()->count() }}</p>
                     </div>
                     <div class="bg-orange-500/20 p-3 rounded-lg">
@@ -64,7 +64,7 @@
                 </div>
                 <div class="mt-4">
                     <span class="text-green-400 text-sm">
-                        +{{ auth()->user()->meetings()->where('created_at', '>=', now()->subDays(7))->count() }} esta semana
+                        +{{ auth()->user()->meetings()->where('created_at', '>=', now()->subDays(7))->count() }} {{ __('this week') }}
                     </span>
                 </div>
             </div>
@@ -73,7 +73,7 @@
             <div class="bg-gray-800/50 backdrop-blur-sm border border-gray-700/50 rounded-xl p-6 hover:border-orange-500/30 transition-all duration-300">
                 <div class="flex items-center justify-between">
                     <div>
-                        <p class="text-gray-400 text-sm">Horas Analizadas</p>
+                        <p class="text-gray-400 text-sm">{{ __('Hours Analyzed') }}</p>
                         <p class="text-2xl font-bold text-white">
                             {{ number_format(auth()->user()->meetings()->count() * 0.75, 1) }}h
                         </p>
@@ -85,7 +85,7 @@
                     </div>
                 </div>
                 <div class="mt-4">
-                    <span class="text-purple-400 text-sm">Tiempo promedio: 45min</span>
+                    <span class="text-purple-400 text-sm">{{ __('Average time: 45min') }}</span>
                 </div>
             </div>
 
@@ -93,7 +93,7 @@
             <div class="bg-gray-800/50 backdrop-blur-sm border border-gray-700/50 rounded-xl p-6 hover:border-orange-500/30 transition-all duration-300">
                 <div class="flex items-center justify-between">
                     <div>
-                        <p class="text-gray-400 text-sm">Insights Generados</p>
+                        <p class="text-gray-400 text-sm">{{ __('Insights Generated') }}</p>
                         <p class="text-2xl font-bold text-white">{{ auth()->user()->meetings()->whereNotNull('resumen')->count() }}</p>
                     </div>
                     <div class="bg-green-500/20 p-3 rounded-lg">
@@ -103,28 +103,28 @@
                     </div>
                 </div>
                 <div class="mt-4">
-                    <span class="text-green-400 text-sm">98% precisión promedio</span>
+                    <span class="text-green-400 text-sm">{{ __('98% average accuracy') }}</span>
                 </div>
             </div>
 
             <!-- Tu Token API -->
             <div class="bg-gray-800/50 backdrop-blur-sm border border-gray-700/50 rounded-xl p-6">
                 <div class="flex items-center justify-between mb-4">
-                    <h3 class="text-lg font-semibold text-white">Tu Token API</h3>
+                    <h3 class="text-lg font-semibold text-white">{{ __('Your API Token') }}</h3>
                     <div class="bg-blue-500/20 p-2 rounded-lg">
                         <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-blue-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="15 7a2 2 0 012 2m0 0a2 2 0 012 2m-2-2a2 2 0 00-2 2m2-2a2 2 0 002 2M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
                         </svg>
                     </div>
                 </div>
-                <p class="text-gray-300 text-sm mb-4">Para usar con la extensión oficial de Reunai</p>
+                <p class="text-gray-300 text-sm mb-4">{{ __('To use with the official Reunai extension') }}</p>
                 <div class="bg-gray-900/50 p-3 rounded-lg border border-gray-700 mb-4">
                     <code class="text-orange-400 text-sm break-all">
-                        {{ auth()->user()->api_token ?? 'Token no generado' }}
+                        {{ auth()->user()->api_token ?? __('Token not generated') }}
                     </code>
                 </div>
                 <button onclick="copyToClipboard('{{ auth()->user()->api_token }}')" class="w-full bg-blue-600 hover:bg-blue-700 text-white py-2 px-4 rounded-lg text-sm transition-colors">
-                    Copiar Token
+                    {{ __('Copy Token') }}
                 </button>
             </div>
         </div>
@@ -137,12 +137,12 @@
                    c-.77 1.333.192 3 1.732 3z"/>
         </svg>
         <div>
-            <p class="font-semibold">Límite mensual alcanzado</p>
+            <p class="font-semibold">{{ __('Monthly limit reached') }}</p>
             <p class="text-sm">
-                Has agotado las reuniones de tu plan.
+                {{ __('You have exhausted the meetings of your plan.') }}
                 <a href="{{ route('subscription.manage') }}"
                    class="underline text-orange-300 ml-1">
-                    Actualiza tu plan
+                    {{ __('Upgrade your plan') }}
                 </a>
             </p>
         </div>
@@ -161,8 +161,8 @@
                     <div id="uploadOverlay" class="absolute inset-0 bg-gray-900/90 backdrop-blur-sm rounded-xl hidden items-center justify-center z-10">
                         <div class="text-center">
                             <div class="animate-spin rounded-full h-12 w-12 border-b-2 border-orange-500 mx-auto mb-4"></div>
-                            <p class="text-white font-medium">Subiendo archivo...</p>
-                            <p class="text-gray-400 text-sm mt-1">Esto puede tardar unos momentos</p>
+                            <p class="text-white font-medium">{{ __('Uploading file...') }}</p>
+                            <p class="text-gray-400 text-sm mt-1">{{ __('This may take a few moments') }}</p>
                         </div>
                     </div>
 
@@ -172,8 +172,8 @@
                             <svg xmlns="http://www.w3.org/2000/svg" class="h-16 w-16 text-orange-400 mx-auto mb-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 16a4 4 0 01-.88-7.903A5 5 0 1115.9 6L16 6a5 5 0 011 9.9M9 12l3 3m0 0l3-3m0 0V9" />
                             </svg>
-                            <p class="text-white text-xl font-semibold">¡Suelta aquí tu archivo!</p>
-                            <p class="text-orange-200 text-sm mt-1">Archivo de audio o video</p>
+                            <p class="text-white text-xl font-semibold">{{ __('Drop your file here!') }}</p>
+                            <p class="text-orange-200 text-sm mt-1">{{ __('Audio or video file') }}</p>
                         </div>
                     </div>
 
@@ -185,8 +185,8 @@
                             </svg>
                         </div>
                         
-                        <h3 class="text-2xl font-bold text-white mb-2">Sube tu reunión</h3>
-                        <p class="text-gray-300 mb-4">Arrastra tu archivo de audio o video aquí, o haz clic para seleccionar</p>
+                        <h3 class="text-2xl font-bold text-white mb-2">{{ __('Upload your meeting') }}</h3>
+                        <p class="text-gray-300 mb-4">{{ __('Drag your audio or video file here, or click to select') }}</p>
                         
                         <div class="flex flex-wrap justify-center gap-2 mb-6">
                             <span class="px-3 py-1 bg-gray-700/50 text-gray-300 text-xs rounded-full">MP3</span>
@@ -200,7 +200,7 @@
                             <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4" />
                             </svg>
-                            Seleccionar archivo
+                            {{ __('Select file') }}
                         </button>
                     </div>
 
@@ -211,15 +211,15 @@
                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
                             </svg>
                         </div>
-                        <h3 class="text-xl font-bold text-white mb-2">¡Archivo listo!</h3>
+                        <h3 class="text-xl font-bold text-white mb-2">{{ __('File ready!') }}</h3>
                         <p id="fileName" class="text-gray-300 mb-1"></p>
                         <p id="fileSize" class="text-gray-400 text-sm mb-6"></p>
-                        
+
                         <!-- Campo de título integrado elegantemente -->
                         <div class="max-w-md mx-auto mb-6">
                             <div class="relative">
                                 <input type="text" name="titulo" id="titulo" required
-                                       placeholder="Ponle un nombre a esta reunión..." 
+                                       placeholder="{{ __('Give this meeting a name...') }}"
                                        class="w-full bg-gray-800/70 border-2 border-gray-600/50 rounded-xl py-4 px-6 text-white text-center text-lg placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-orange-500/50 focus:border-orange-500 transition-all duration-300 focus:bg-gray-800/90">
                                 <div class="absolute inset-0 bg-gradient-to-r from-orange-500/5 to-red-500/5 rounded-xl pointer-events-none opacity-0 transition-opacity duration-300" id="titleGlow"></div>
                             </div>
@@ -227,7 +227,7 @@
                                 <svg xmlns="http://www.w3.org/2000/svg" class="h-3 w-3 inline mr-1" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
                                 </svg>
-                                Ej: "Reunión equipo marketing", "Daily standup 24 Sep"
+                                {{ __('E.g.: Marketing team meeting, Daily standup Sep 24') }}
                             </p>
                         </div>
 
@@ -241,14 +241,14 @@
                                         ? 'bg-gray-600 cursor-not-allowed text-gray-300'
                                         : 'bg-gradient-to-r from-orange-500 to-red-500 hover:-translate-y-1 hover:shadow-xl'
                                     }}">
-                                Procesar con IA
+                                {{ __('Process with AI') }}
                             </button>
 
                             <button type="button" onclick="resetUpload()" class="inline-flex items-center px-6 py-4 bg-gray-700/50 hover:bg-gray-700 text-gray-300 hover:text-white font-medium rounded-xl transition-all duration-300">
                                 <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15" />
                                 </svg>
-                                Cambiar archivo
+                                {{ __('Change file') }}
                             </button>
                         </div>
                     </div>
@@ -271,7 +271,7 @@
         <div class="grid grid-cols-1 lg:grid-cols-2 gap-8 mb-8">
             <div class="bg-gray-800/50 backdrop-blur-sm border border-gray-700/50 rounded-xl p-6">
                 <div class="flex items-center justify-between mb-4">
-                    <h3 class="text-xl font-semibold text-white">Acciones rápidas</h3>
+                    <h3 class="text-xl font-semibold text-white">{{ __('Quick actions') }}</h3>
                 </div>
                 <div class="">
                     <a href="{{ route('reuniones.index') }}" class="flex flex-col items-center p-4 bg-gray-700/30 hover:bg-gray-700/50 rounded-lg transition-colors group">
@@ -280,7 +280,7 @@
                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 11H5m14 0a2 2 0 012 2v6a2 2 0 01-2 2H5a2 2 0 01-2-2v-6a2 2 0 012-2m14 0V9a2 2 0 00-2-2M5 11V9a2 2 0 012-2m0 0V5a2 2 0 012-2h6a2 2 0 012 2v2M7 7h10" />
                             </svg>
                         </div>
-                        <span class="text-white text-sm font-medium text-center">Ver todas las reuniones</span>
+                        <span class="text-white text-sm font-medium text-center">{{ __('View all meetings') }}</span>
                     </a>
                     
                     <!-- <a href="{{ route('integrations.index') }}" class="flex flex-col items-center p-4 bg-gray-700/30 hover:bg-gray-700/50 rounded-lg transition-colors group">
@@ -296,7 +296,7 @@
             </div>
 
             <div class="bg-gray-800/50 backdrop-blur-sm border border-gray-700/50 rounded-xl p-6">
-                <h3 class="text-xl font-semibold text-white mb-4">Consejos para mejores resultados</h3>
+                <h3 class="text-xl font-semibold text-white mb-4">{{ __('Tips for better results') }}</h3>
                 <div class="space-y-3">
                     <div class="flex items-start space-x-3">
                         <div class="bg-green-500/20 p-1 rounded-full mt-0.5">
@@ -304,7 +304,7 @@
                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
                             </svg>
                         </div>
-                        <p class="text-gray-300 text-sm">Audio claro y sin ruido de fondo</p>
+                        <p class="text-gray-300 text-sm">{{ __('Clear audio without background noise') }}</p>
                     </div>
                     <div class="flex items-start space-x-3">
                         <div class="bg-green-500/20 p-1 rounded-full mt-0.5">
@@ -312,7 +312,7 @@
                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
                             </svg>
                         </div>
-                        <p class="text-gray-300 text-sm">Mencionar nombres de participantes</p>
+                        <p class="text-gray-300 text-sm">{{ __('Mention participant names') }}</p>
                     </div>
                     <div class="flex items-start space-x-3">
                         <div class="bg-green-500/20 p-1 rounded-full mt-0.5">
@@ -320,7 +320,7 @@
                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
                             </svg>
                         </div>
-                        <p class="text-gray-300 text-sm">Definir tareas y responsabilidades claramente</p>
+                        <p class="text-gray-300 text-sm">{{ __('Clearly define tasks and responsibilities') }}</p>
                     </div>
                 </div>
             </div>
@@ -329,9 +329,9 @@
         <!-- Reuniones Recientes -->
         <div class="bg-gray-800/50 backdrop-blur-sm border border-gray-700/50 rounded-xl p-6">
             <div class="flex items-center justify-between mb-6">
-                <h3 class="text-xl font-semibold text-white">Reuniones Recientes</h3>
+                <h3 class="text-xl font-semibold text-white">{{ __('Recent Meetings') }}</h3>
                 <a href="{{ route('reuniones.index') }}" class="text-orange-400 hover:text-orange-300 text-sm flex items-center">
-                    Ver todas
+                    {{ __('View all') }}
                     <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 ml-1" viewBox="0 0 20 20" fill="currentColor">
                         <path fill-rule="evenodd" d="M10.293 5.293a1 1 0 011.414 0l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414-1.414L12.586 11H5a1 1 0 110-2h7.586l-2.293-2.293a1 1 0 010-1.414z" clip-rule="evenodd" />
                     </svg>
@@ -343,12 +343,12 @@
                 <div class="bg-gray-700/30 rounded-lg p-4 hover:bg-gray-700/50 transition-colors">
                     <div class="flex items-start justify-between">
                         <div class="flex-1 text-white">
-                            <h4 class="font-medium text-white mb-1">{{ $reunion->titulo ?? 'Sin título' }}</h4>
+                            <h4 class="font-medium text-white mb-1">{{ $reunion->titulo ?? __('Untitled') }}</h4>
                             <div class="flex items-center text-sm text-gray-400 space-x-4">
                                 <span>{{ $reunion->created_at->format('j M') }}</span>
                                 <span class="flex items-center">
                                     <span class="inline-block w-2 h-2 bg-{{ $reunion->resumen ? 'green' : 'orange' }}-400 rounded-full mr-1"></span>
-                                    {{ $reunion->resumen ? 'Procesado' : 'Procesando...' }}
+                                    {{ $reunion->resumen ? __('Processed') : __('Processing...') }}
                                 </span>
                             </div>
                             @if($reunion->resumen)
@@ -370,8 +370,8 @@
                     <svg xmlns="http://www.w3.org/2000/svg" class="h-12 w-12 mx-auto text-gray-600 mb-3" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 11H5m14 0a2 2 0 012 2v6a2 2 0 01-2 2H5a2 2 0 01-2-2v-6a2 2 0 012-2m14 0V9a2 2 0 00-2-2M5 11V9a2 2 0 012-2m0 0V5a2 2 0 012-2h6a2 2 0 012 2v2M7 7h10" />
                     </svg>
-                    <p class="text-gray-400">No tienes reuniones todavía</p>
-                    <p class="text-sm text-gray-500 mt-1">Sube tu primera reunión para empezar</p>
+                    <p class="text-gray-400">{{ __('You don\'t have any meetings yet') }}</p>
+                    <p class="text-sm text-gray-500 mt-1">{{ __('Upload your first meeting to get started') }}</p>
                 </div>
                 @endforelse
             </div>
@@ -453,7 +453,7 @@
                     fileInput.files = files;
                     displaySelectedFile(file);
                 } else {
-                    showError('Tipo de archivo no válido. Solo se permiten archivos de audio y video.');
+                    showError('{{ __('Invalid file type. Only audio and video files are allowed.') }}');
                 }
             }
         }
@@ -463,7 +463,7 @@
             if (file && isValidFile(file)) {
                 displaySelectedFile(file);
             } else if (file) {
-                showError('Tipo de archivo no válido. Solo se permiten archivos de audio y video.');
+                showError('{{ __('Invalid file type. Only audio and video files are allowed.') }}');
                 resetUpload();
             }
         }
@@ -545,7 +545,7 @@
         uploadForm.addEventListener('submit', function(e) {
             if (!fileInput.files.length) {
                 e.preventDefault();
-                showError('Por favor selecciona un archivo primero.');
+                showError('{{ __('Please select a file') }}');
                 return;
             }
 
@@ -553,24 +553,24 @@
             const tituloField = document.getElementById('titulo');
             if (!tituloField.value.trim()) {
                 e.preventDefault();
-                
+
                 // Destacar el campo vacío
                 tituloField.classList.add('border-red-500', 'bg-red-500/10');
                 tituloField.focus();
-                
+
                 // Shake animation
                 tituloField.style.animation = 'shake 0.5s';
                 setTimeout(() => {
                     tituloField.style.animation = '';
                 }, 500);
-                
-                showError('Por favor, ponle un nombre a la reunión.');
-                
+
+                showError('{{ __('Please give the meeting a name.') }}');
+
                 // Quitar estilos de error después de que el usuario empiece a escribir
                 tituloField.addEventListener('input', function() {
                     this.classList.remove('border-red-500', 'bg-red-500/10');
                 }, { once: true });
-                
+
                 return;
             }
 
@@ -587,9 +587,9 @@
         // Función para copiar token
         function copyToClipboard(text) {
             navigator.clipboard.writeText(text).then(function() {
-                showSuccess('Token copiado al portapapeles!');
+                showSuccess('{{ __('Token copied to clipboard!') }}');
             }, function(err) {
-                showError('No se pudo copiar el token: ' + err);
+                showError('{{ __('Could not copy token') }}: ' + err);
             });
         }
 
@@ -600,7 +600,7 @@
                 // Límite de 100MB
                 const maxSize = 100 * 1024 * 1024; // 100MB en bytes
                 if (file.size > maxSize) {
-                    showError('El archivo es demasiado grande. El tamaño máximo permitido es 100MB.');
+                    showError('{{ __('File is too large. Maximum allowed size is 100MB.') }}');
                     resetUpload();
                     return;
                 }

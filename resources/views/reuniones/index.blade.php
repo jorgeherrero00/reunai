@@ -6,10 +6,10 @@
     <!-- Header section -->
     <div class="mb-10 text-center">
         <h1 class="text-3xl md:text-4xl font-bold bg-gradient-to-r from-orange-400 to-red-500 bg-clip-text text-transparent mb-4">
-            Mis reuniones
+            {{ __('My Meetings') }}
         </h1>
         <p class="text-gray-400 max-w-2xl mx-auto">
-            Gestiona tus conversaciones y obtén resúmenes inteligentes al instante
+            {{ __('Manage your conversations and get intelligent summaries instantly') }}
         </p>
     </div>
 
@@ -25,12 +25,12 @@
                         </svg>
                     </div>
                     <div>
-                        <h3 class="text-sm text-gray-400 uppercase tracking-wide">Plan actual</h3>
+                        <h3 class="text-sm text-gray-400 uppercase tracking-wide">{{ __('Current plan') }}</h3>
                         <p class="text-2xl font-bold text-white capitalize flex items-center gap-2">
-                            
+
                             @if($stats['plan'] === 'free')
-                                Free
-                                <span class="text-xs bg-gray-700 text-gray-300 px-2 py-1 rounded-full">Gratis</span>
+                                {{ __('Free') }}
+                                <span class="text-xs bg-gray-700 text-gray-300 px-2 py-1 rounded-full">{{ __('Free') }}</span>
                             @elseif($stats['plan'] === 'starter')
                                 Starter
                                 <span class="text-xs bg-orange-500/20 text-orange-300 px-2 py-1 rounded-full">€9/mes</span>
@@ -45,7 +45,7 @@
                 <!-- Progress bar -->
                 <div class="space-y-3">
                     <div class="flex justify-between items-center text-sm">
-                        <span class="text-gray-400">Reuniones este mes</span>
+                        <span class="text-gray-400">{{ __('Meetings this month') }}</span>
                         <span class="text-white font-semibold">
                             {{ $stats['meetings_used'] }} / {{ $stats['meetings_limit'] }}
                         </span>
@@ -62,11 +62,11 @@
                     @if($stats['meetings_remaining'] > 0)
                         <div class="flex items-center justify-between text-xs">
                             <span class="text-gray-500">
-                                Quedan <span class="text-orange-400 font-bold">{{ $stats['meetings_remaining'] }}</span> 
-                                {{ $stats['meetings_remaining'] == 1 ? 'reunión' : 'reuniones' }}
+                                {{ __('remaining') }} <span class="text-orange-400 font-bold">{{ $stats['meetings_remaining'] }}</span>
+                                {{ $stats['meetings_remaining'] == 1 ? __('meeting') : __('meetings') }}
                             </span>
                             <span class="text-gray-500">
-                                Reinicio: {{ $stats['next_reset'] }}
+                                {{ __('Reset') }}: {{ $stats['next_reset'] }}
                             </span>
                         </div>
                     @else
@@ -75,9 +75,9 @@
                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z" />
                             </svg>
                             <div>
-                                <p class="text-sm text-red-300 font-medium">Límite alcanzado</p>
+                                <p class="text-sm text-red-300 font-medium">{{ __('Limit reached') }}</p>
                                 <p class="text-xs text-white mt-1">
-                                    Próximo reinicio: {{ $stats['next_reset'] }}
+                                    {{ __('Next reset') }}: {{ $stats['next_reset'] }}
                                 </p>
                             </div>
                         </div>
@@ -89,59 +89,59 @@
             <div class="md:w-80 space-y-4">
                 <!-- Features del plan -->
                 <div class="bg-gray-900/50 rounded-xl p-4 space-y-2">
-                    <p class="text-xs text-gray-400 uppercase tracking-wide mb-3">Características</p>
+                    <p class="text-xs text-gray-400 uppercase tracking-wide mb-3">{{ __('Features') }}</p>
                     <div class="space-y-2 text-sm">
                         <div class="flex items-center gap-2">
                             @if($stats['features']['sentiment_analysis'])
                                 <svg class="w-4 h-4 text-green-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
                                 </svg>
-                                <span class="text-gray-300">Análisis de sentimiento</span>
+                                <span class="text-gray-300">{{ __('Sentiment analysis') }}</span>
                             @else
                                 <svg class="w-4 h-4 text-gray-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
                                 </svg>
-                                <span class="text-gray-600 line-through">Análisis de sentimiento</span>
+                                <span class="text-gray-600 line-through">{{ __('Sentiment analysis') }}</span>
                             @endif
                         </div>
-                        
+
                         <div class="flex items-center gap-2">
                             @if($stats['features']['integrations'])
                                 <svg class="w-4 h-4 text-green-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
                                 </svg>
-                                <span class="text-gray-300">Integraciones (Slack, etc.)</span>
+                                <span class="text-gray-300">{{ __('Integrations (Slack, etc.)') }}</span>
                             @else
                                 <svg class="w-4 h-4 text-gray-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
                                 </svg>
-                                <span class="text-gray-600 line-through">Integraciones</span>
+                                <span class="text-gray-600 line-through">{{ __('Integrations (Slack, etc.)') }}</span>
                             @endif
                         </div>
-                        
+
                         <div class="flex items-center gap-2 text-xs text-gray-500">
                             <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
                             </svg>
-                            Máx. {{ $stats['max_duration'] }} min por reunión
+                            {{ __('Max') }} {{ $stats['max_duration'] }} {{ __('min per meeting') }}
                         </div>
                     </div>
                 </div>
                 
                 <!-- CTA Button -->
                 @if($stats['plan'] !== 'pro')
-                    <a href="{{ route('subscription.manage') }}" 
+                    <a href="{{ route('subscription.manage') }}"
                        class="block w-full py-3 px-6 text-center bg-gradient-to-r from-orange-500 to-red-500 text-white font-semibold rounded-xl shadow-lg shadow-orange-500/30 hover:shadow-orange-500/50 hover:-translate-y-0.5 transition-all duration-300">
                         @if($stats['plan'] === 'free')
-                            Actualizar a Starter
+                            {{ __('Upgrade to Starter') }}
                         @else
-                            Actualizar a Pro
+                            {{ __('Upgrade to Pro') }}
                         @endif
                     </a>
                 @else
-                    <a href="{{ route('subscription.manage') }}" 
+                    <a href="{{ route('subscription.manage') }}"
                        class="block w-full py-3 px-6 text-center bg-gray-700/50 text-gray-300 font-medium rounded-xl hover:bg-gray-700 transition-colors">
-                        Gestionar suscripción
+                        {{ __('Manage subscription') }}
                     </a>
                 @endif
             </div>
@@ -194,10 +194,10 @@
             <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-2 text-orange-500" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 16a4 4 0 01-.88-7.903A5 5 0 1115.9 6L16 6a5 5 0 011 9.9M15 13l-3-3m0 0l-3 3m3-3v12" />
             </svg>
-            Subir nueva reunión
+            {{ __('Upload new meeting') }}
             @if($stats['meetings_remaining'] <= 0)
                 <span class="ml-auto text-xs bg-red-500/20 text-red-300 px-3 py-1 rounded-full">
-                    Límite alcanzado
+                    {{ __('Limit reached') }}
                 </span>
             @endif
         </h2>
@@ -211,26 +211,26 @@
             
             <div class="grid md:grid-cols-2 gap-6">
                 <div>
-                    <label for="titulo" class="block text-sm text-gray-400 mb-2">Título (opcional)</label>
-                    <input type="text" 
-                           name="titulo" 
-                           id="titulo" 
-                           placeholder="Ej: Reunión equipo marketing" 
+                    <label for="titulo" class="block text-sm text-gray-400 mb-2">{{ __('Title (optional)') }}</label>
+                    <input type="text"
+                           name="titulo"
+                           id="titulo"
+                           placeholder="{{ __('E.g.: Marketing team meeting') }}"
                            class="w-full bg-gray-700/50 border border-gray-600 rounded-lg py-3 px-4 text-white focus:outline-none focus:ring-2 focus:ring-orange-500/50 focus:border-orange-500 transition-all"
                            {{ $stats['meetings_remaining'] <= 0 ? 'disabled' : '' }}>
                 </div>
-                
+
                 <div>
-                    <label for="archivo" class="block text-sm text-gray-400 mb-2">Archivo de audio/video</label>
-                    <input type="file" 
-                           name="archivo" 
-                           id="archivo" 
-                           required 
-                           accept=".mp4,.mov,.webm,.mp3,.wav,.ogg,.m4a" 
+                    <label for="archivo" class="block text-sm text-gray-400 mb-2">{{ __('Audio/video file') }}</label>
+                    <input type="file"
+                           name="archivo"
+                           id="archivo"
+                           required
+                           accept=".mp4,.mov,.webm,.mp3,.wav,.ogg,.m4a"
                            class="w-full bg-gray-700/50 border border-gray-600 rounded-lg py-3 px-4 text-white focus:outline-none focus:ring-2 focus:ring-orange-500/50 focus:border-orange-500 transition-all file:mr-4 file:py-2 file:px-4 file:rounded-md file:border-0 file:text-sm file:bg-orange-500 file:text-white hover:file:bg-orange-600 disabled:opacity-50 disabled:cursor-not-allowed"
                            {{ $stats['meetings_remaining'] <= 0 ? 'disabled' : '' }}>
                     <p class="mt-2 text-xs text-gray-500">
-                        Máximo {{ $stats['max_duration'] }} minutos • Hasta 100MB
+                        {{ __('Maximum') }} {{ $stats['max_duration'] }} {{ __('min per meeting') }} • {{ __('Up to 100MB') }}
                     </p>
                 </div>
             </div>
@@ -239,12 +239,12 @@
             <div id="progressContainer" class="hidden space-y-4">
                 <div class="bg-gray-700/30 rounded-lg p-4 border border-gray-600/50">
                     <div class="flex justify-between text-sm mb-2">
-                        <span class="text-gray-300 font-medium">Subiendo archivo...</span>
+                        <span class="text-gray-300 font-medium">{{ __('Uploading file...') }}</span>
                         <span id="progressText" class="text-orange-400 font-bold">0%</span>
                     </div>
                     <div class="w-full bg-gray-700 rounded-full h-3 mb-3 overflow-hidden">
-                        <div id="progressBar" 
-                             class="bg-gradient-to-r from-orange-500 to-red-500 h-3 rounded-full transition-all duration-300 shadow-lg" 
+                        <div id="progressBar"
+                             class="bg-gradient-to-r from-orange-500 to-red-500 h-3 rounded-full transition-all duration-300 shadow-lg"
                              style="width: 0%"></div>
                     </div>
                     <div class="flex justify-between text-xs text-gray-400">
@@ -256,7 +256,7 @@
                             <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle>
                             <path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
                         </svg>
-                        Preparando subida...
+                        {{ __('Preparing upload...') }}
                     </p>
                 </div>
             </div>
@@ -271,12 +271,12 @@
                             <svg class="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z" />
                             </svg>
-                            Límite alcanzado
+                            {{ __('Limit reached') }}
                         @else
                             <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-2" viewBox="0 0 20 20" fill="currentColor">
                                 <path fill-rule="evenodd" d="M3 17a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1zM6.293 6.707a1 1 0 010-1.414l3-3a1 1 0 011.414 0l3 3a1 1 0 01-1.414 1.414L11 5.414V13a1 1 0 11-2 0V5.414L7.707 6.707a1 1 0 01-1.414 0z" clip-rule="evenodd" />
                             </svg>
-                            Subir reunión
+                            {{ __('Upload meeting') }}
                         @endif
                     </span>
                     <span class="absolute inset-0 bg-gradient-to-r from-orange-600 to-red-600 opacity-0 group-hover:opacity-100 transition-opacity duration-300"></span>
@@ -291,7 +291,7 @@
             <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 mr-2 text-orange-500" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2" />
             </svg>
-            Historial de reuniones
+            {{ __('Meeting history') }}
         </h2>
 
         @if(count($reuniones) > 0)
@@ -301,7 +301,7 @@
                     <div class="flex flex-col md:flex-row md:justify-between md:items-center gap-4">
                         <div class="flex-1">
                             <h3 class="text-xl font-medium text-white">
-                                {{ $reunion->titulo ?? 'Sin título' }}
+                                {{ $reunion->titulo ?? __('Untitled') }}
                             </h3>
                             <div class="mt-2 flex flex-wrap gap-3">
                                 <span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-orange-500/20 text-orange-300">
@@ -312,7 +312,7 @@
                                 </span>
                                 @if($reunion->tasks && $reunion->tasks->count() > 0)
                                     <span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-blue-500/20 text-blue-300">
-                                        {{ $reunion->tasks->count() }} {{ $reunion->tasks->count() == 1 ? 'tarea' : 'tareas' }}
+                                        {{ $reunion->tasks->count() }} {{ $reunion->tasks->count() == 1 ? __('task') : __('tasks') }}
                                     </span>
                                 @endif
                             </div>
@@ -331,10 +331,10 @@
                     
                     @if($reunion->resumen)
                     <div class="mt-4 pt-4 border-t border-gray-700/50 text-white">
-                        <h4 class="text-sm font-medium text-gray-400 mb-2">Resumen:</h4>
+                        <h4 class="text-sm font-medium text-gray-400 mb-2">{{ __('Summary:') }}</h4>
                         <p class="text-white text-sm line-clamp-3">
                             {!! Str::limit($reunion->resumen, 200) !!}
-                            
+
                         </p>
                     </div>
                     @endif
@@ -346,8 +346,8 @@
                 <svg xmlns="http://www.w3.org/2000/svg" class="h-16 w-16 mx-auto text-gray-600 mb-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 11H5m14 0a2 2 0 012 2v6a2 2 0 01-2 2H5a2 2 0 01-2-2v-6a2 2 0 012-2m14 0V9a2 2 0 00-2-2M5 11V9a2 2 0 012-2m0 0V5a2 2 0 012-2h6a2 2 0 012 2v2M7 7h10" />
                 </svg>
-                <p class="text-gray-400">No tienes reuniones todavía</p>
-                <p class="text-sm text-gray-500 mt-2">Sube tu primera reunión para obtener un resumen inteligente</p>
+                <p class="text-gray-400">{{ __('You don\'t have any meetings yet') }}</p>
+                <p class="text-sm text-gray-500 mt-2">{{ __('Upload your first meeting to get an intelligent summary') }}</p>
             </div>
         @endif
     </div>
@@ -392,8 +392,8 @@ document.addEventListener('DOMContentLoaded', function() {
         if (!fileInput.files[0]) {
             Swal.fire({
                 icon: 'warning',
-                title: 'Archivo requerido',
-                text: 'Por favor selecciona un archivo',
+                title: '{{ __('File required') }}',
+                text: '{{ __('Please select a file') }}',
                 confirmButtonColor: '#f97316'
             });
             return;
@@ -407,7 +407,7 @@ document.addEventListener('DOMContentLoaded', function() {
                 <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle>
                 <path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
             </svg>
-            Subiendo...
+            {{ __('Uploading...') }}
         `;
         
         startTime = Date.now();
@@ -442,7 +442,7 @@ document.addEventListener('DOMContentLoaded', function() {
                             <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle>
                             <path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
                         </svg>
-                        Subiendo archivo...
+                        {{ __('Uploading file...') }}
                     `;
                 } else {
                     statusText.innerHTML = `
@@ -450,7 +450,7 @@ document.addEventListener('DOMContentLoaded', function() {
                             <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle>
                             <path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
                         </svg>
-                        Procesando... Esto puede tomar unos minutos.
+                        {{ __('Processing... This may take a few minutes.') }}
                     `;
                     progressBar.classList.add('animate-pulse');
                 }
@@ -471,22 +471,22 @@ document.addEventListener('DOMContentLoaded', function() {
                             <svg class="mr-2 h-4 w-4 text-green-500" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
                             </svg>
-                            ✅ Archivo subido. Procesando...
+                            {{ __('File uploaded. Processing...') }}
                         `;
                         setTimeout(() => window.location.href = '/reuniones', 2000);
                     }
                 } catch(e) {
                     // Respuesta HTML (success redirect)
-                    statusText.innerHTML = `✅ ¡Éxito! Redirigiendo...`;
+                    statusText.innerHTML = `{{ __('Success! Redirecting...') }}`;
                     setTimeout(() => window.location.href = '/reuniones', 1500);
                 }
             } else {
-                handleError('Error al subir. Código: ' + xhr.status);
+                handleError('{{ __('Error uploading. Code:') }} ' + xhr.status);
             }
         });
-        
-        xhr.addEventListener('error', () => handleError('Error de conexión'));
-        xhr.addEventListener('timeout', () => handleError('Tiempo agotado'));
+
+        xhr.addEventListener('error', () => handleError('{{ __('Connection error') }}'));
+        xhr.addEventListener('timeout', () => handleError('{{ __('Timeout') }}'));
         
         xhr.open('POST', '{{ route("reuniones.store") }}');
         xhr.setRequestHeader('X-CSRF-TOKEN', '{{ csrf_token() }}');
@@ -501,7 +501,7 @@ document.addEventListener('DOMContentLoaded', function() {
             <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-2" viewBox="0 0 20 20" fill="currentColor">
                 <path fill-rule="evenodd" d="M3 17a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1zM6.293 6.707a1 1 0 010-1.414l3-3a1 1 0 011.414 0l3 3a1 1 0 01-1.414 1.414L11 5.414V13a1 1 0 11-2 0V5.414L7.707 6.707a1 1 0 01-1.414 0z" clip-rule="evenodd" />
             </svg>
-            Subir reunión
+            {{ __('Upload meeting') }}
         `;
     }
     
