@@ -113,8 +113,7 @@
                     <h3 class="text-lg font-semibold text-white">{{ __('Your API Token') }}</h3>
                     <div class="bg-blue-500/20 p-2 rounded-lg">
                         <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-blue-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="15 7a2 2 0 012 2m0 0a2 2 0 012 2m-2-2a2 2 0 00-2 2m2-2a2 2 0 002 2M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
-                        </svg>
+<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 7a2 2 0 012 2m0 0a2 2 0 012 2m-2-2a2 2 0 00-2 2m2-2a2 2 0 002 2M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />                        </svg>
                     </div>
                 </div>
                 <p class="text-gray-300 text-sm mb-4">{{ __('To use with the official Reunai extension') }}</p>

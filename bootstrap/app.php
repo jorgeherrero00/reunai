@@ -5,6 +5,9 @@ use Illuminate\Foundation\Configuration\Exceptions;
 use Illuminate\Foundation\Configuration\Middleware;
 use App\Http\Middleware\AuthenticateWithApiToken;
 use App\Http\Middleware\CheckMeetingLimit;
+use App\Http\Middleware\SetLocale;
+
+
 use Illuminate\Http\Middleware\HandleCors;
 
 
@@ -19,8 +22,14 @@ return Application::configure(basePath: dirname(__DIR__))
     ->withMiddleware(function (Middleware $middleware) {
         //
         
-        $middleware->append(HandleCors::class);
-        $middleware->alias([
+ $middleware->append(HandleCors::class);
+
+        $middleware->web(append: [
+
+            SetLocale::class,
+
+        ]);
+                $middleware->alias([
             'auth.api_token' => AuthenticateWithApiToken::class,
             'check.meeting.limit' => CheckMeetingLimit::class,
 
