@@ -3,7 +3,7 @@
     <header class="text-center">
         <div class="inline-flex items-center bg-gradient-to-r from-red-500/30 to-orange-500/30 px-4 py-2 rounded-full backdrop-blur-sm mb-4 border border-red-500/20 shadow-lg">
             <span class="animate-pulse mr-2 h-2 w-2 bg-red-500 rounded-full"></span>
-            <span class="text-red-300 font-medium tracking-wider text-xs uppercase">Zona Peligrosa</span>
+            <span class="text-red-300 font-medium tracking-wider text-xs uppercase">{{ __('Danger Zone') }}</span>
         </div>
         
         <h2 class="text-3xl font-bold mb-4 bg-gradient-to-r from-white via-gray-100 to-gray-300 text-transparent bg-clip-text">
@@ -91,15 +91,15 @@
     <!-- Información adicional -->
     <div class="mt-12 text-center">
         <div class="bg-gray-800/50 backdrop-blur-sm border border-gray-700/50 rounded-xl p-6">
-            <h3 class="text-lg font-semibold mb-3 text-orange-400">¿Necesitas ayuda?</h3>
+            <h3 class="text-lg font-semibold mb-3 text-orange-400">{{ __('Need help?') }}</h3>
             <p class="text-gray-400 text-sm mb-4">
-                Si tienes problemas con tu cuenta o necesitas asistencia antes de eliminarla, nuestro equipo de soporte está aquí para ayudarte.
+                {{ __('If you have problems with your account or need assistance before deleting it, our support team is here to help you.') }}
             </p>
             <a href="#contact" class="inline-flex items-center text-orange-400 hover:text-orange-300 font-medium transition-colors">
                 <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 10h.01M12 10h.01M16 10h.01M9 16H5a2 2 0 01-2-2V6a2 2 0 012-2h14a2 2 0 012 2v8a2 2 0 01-2 2h-5l-5 5v-5z" />
                 </svg>
-                Contactar soporte
+                {{ __('Contact support') }}
             </a>
         </div>
     </div>

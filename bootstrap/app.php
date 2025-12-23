@@ -21,15 +21,12 @@ return Application::configure(basePath: dirname(__DIR__))
     )
     ->withMiddleware(function (Middleware $middleware) {
         //
-        
- $middleware->append(HandleCors::class);
 
+        $middleware->append(HandleCors::class);
         $middleware->web(append: [
-
             SetLocale::class,
-
         ]);
-                $middleware->alias([
+        $middleware->alias([
             'auth.api_token' => AuthenticateWithApiToken::class,
             'check.meeting.limit' => CheckMeetingLimit::class,
 
