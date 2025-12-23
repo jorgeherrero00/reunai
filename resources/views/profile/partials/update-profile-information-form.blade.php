@@ -3,7 +3,7 @@
     <header class="text-center">
         <div class="inline-flex items-center bg-gradient-to-r from-orange-400 to-red-500 px-4 py-2 rounded-full backdrop-blur-sm mb-4 border border-orange-500/20 shadow-lg">
             <span class="animate-pulse mr-2 h-2 w-2 bg-white rounded-full"></span>
-            <span class="text-white font-medium tracking-wider text-xs uppercase">Información Personal</span>
+            <span class="text-white font-medium tracking-wider text-xs uppercase">{{ __('Personal Information') }}</span>
         </div>
         
         <h2 class="text-3xl font-bold mb-4 bg-gradient-to-r from-white via-gray-100 to-gray-300 text-transparent bg-clip-text">
@@ -39,11 +39,11 @@
                         name="name" 
                         type="text" 
                         class="w-full bg-gray-700/50 border border-gray-600 rounded-lg py-3 px-4 pl-12 text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-orange-400 focus:border-orange-400 transition-all" 
-                        :value="old('name', $user->name)" 
-                        required 
-                        autofocus 
+                        :value="old('name', $user->name)"
+                        required
+                        autofocus
                         autocomplete="name"
-                        placeholder="Introduce tu nombre completo"
+                        placeholder="{{ __('Enter your full name') }}"
                     />
                     <div class="absolute inset-y-0 left-0 flex items-center pl-3">
                         <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-gray-400 group-focus-within:text-orange-400 transition-colors" fill="none" viewBox="0 0 24 24" stroke="currentColor">
@@ -67,10 +67,10 @@
                         name="email" 
                         type="email" 
                         class="w-full bg-gray-700/50 border border-gray-600 rounded-lg py-3 px-4 pl-12 text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-orange-400 focus:border-orange-400 transition-all" 
-                        :value="old('email', $user->email)" 
-                        required 
+                        :value="old('email', $user->email)"
+                        required
                         autocomplete="username"
-                        placeholder="tu@email.com"
+                        placeholder="{{ __('your@email.com') }}"
                     />
                     <div class="absolute inset-y-0 left-0 flex items-center pl-3">
                         <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-gray-400 group-focus-within:text-orange-400 transition-colors" fill="none" viewBox="0 0 24 24" stroke="currentColor">
@@ -122,7 +122,7 @@
                         <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 mr-2" viewBox="0 0 20 20" fill="currentColor">
                             <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd" />
                         </svg>
-                        <span>Email verificado</span>
+                        <span>{{ __('Email verified') }}</span>
                     </div>
                 @endif
             </div>
@@ -169,32 +169,32 @@
                 <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-2" viewBox="0 0 20 20" fill="currentColor">
                     <path fill-rule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-6-3a2 2 0 11-4 0 2 2 0 014 0zm-2 4a5 5 0 00-4.546 2.916A5.986 5.986 0 0010 16a5.986 5.986 0 004.546-2.084A5 5 0 0010 11z" clip-rule="evenodd" />
                 </svg>
-                Estado de la cuenta
+                {{ __('Account status') }}
             </h3>
             <div class="space-y-3 text-sm">
                 <div class="flex justify-between items-center">
-                    <span class="text-gray-400">Cuenta creada:</span>
+                    <span class="text-gray-400">{{ __('Account created:') }}</span>
                     <span class="text-white">{{ $user->created_at->format('d/m/Y') }}</span>
                 </div>
                 <div class="flex justify-between items-center">
-                    <span class="text-gray-400">Último acceso:</span>
+                    <span class="text-gray-400">{{ __('Last access:') }}</span>
                     <span class="text-white">{{ $user->updated_at->diffForHumans() }}</span>
                 </div>
                 <div class="flex justify-between items-center">
-                    <span class="text-gray-400">Email verificado:</span>
+                    <span class="text-gray-400">{{ __('Email verified:') }}</span>
                     @if($user->hasVerifiedEmail())
                         <span class="flex items-center text-green-400">
                             <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 mr-1" viewBox="0 0 20 20" fill="currentColor">
                                 <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd" />
                             </svg>
-                            Sí
+                            {{ __('Yes') }}
                         </span>
                     @else
                         <span class="flex items-center text-yellow-400">
                             <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 mr-1" viewBox="0 0 20 20" fill="currentColor">
                                 <path fill-rule="evenodd" d="M8.257 3.099c.765-1.36 2.722-1.36 3.486 0l5.58 9.92c.75 1.334-.213 2.98-1.742 2.98H4.42c-1.53 0-2.493-1.646-1.743-2.98l5.58-9.92zM11 13a1 1 0 11-2 0 1 1 0 012 0zm-1-8a1 1 0 00-1 1v3a1 1 0 002 0V6a1 1 0 00-1-1z" clip-rule="evenodd" />
                             </svg>
-                            Pendiente
+                            {{ __('Pending') }}
                         </span>
                     @endif
                 </div>
@@ -207,20 +207,20 @@
                 <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-2" viewBox="0 0 20 20" fill="currentColor">
                     <path fill-rule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7-4a1 1 0 11-2 0 1 1 0 012 0zM9 9a1 1 0 000 2v3a1 1 0 001 1h1a1 1 0 100-2v-3a1 1 0 00-1-1H9z" clip-rule="evenodd" />
                 </svg>
-                Consejos
+                {{ __('Tips') }}
             </h3>
             <div class="space-y-2 text-sm text-gray-400">
                 <div class="flex items-start">
                     <span class="text-orange-400 mr-2 mt-0.5">•</span>
-                    <span>Usa tu nombre real para mejor identificación</span>
+                    <span>{{ __('Use your real name for better identification') }}</span>
                 </div>
                 <div class="flex items-start">
                     <span class="text-orange-400 mr-2 mt-0.5">•</span>
-                    <span>Verifica tu email para mayor seguridad</span>
+                    <span>{{ __('Verify your email for greater security') }}</span>
                 </div>
                 <div class="flex items-start">
                     <span class="text-orange-400 mr-2 mt-0.5">•</span>
-                    <span>Mantén tu información actualizada</span>
+                    <span>{{ __('Keep your information up to date') }}</span>
                 </div>
             </div>
         </div>

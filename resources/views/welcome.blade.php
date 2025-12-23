@@ -3,20 +3,20 @@
     <head>
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1">
-        <meta name="description" content="Reunai es una herramienta que transforma tus reuniones en acciones concretas. Sube tus grabaciones y obtén resúmenes, análisis de sentimiento e insights conductuales.">
+        <meta name="description" content="{{ __('Reunai is a tool that transforms your meetings into concrete actions. Upload your recordings and get summaries, sentiment analysis and behavioral insights.') }}">
         <meta name="keywords" content="Reunai, reuniones, resúmenes, análisis de sentimiento, insights conductuales, productividad, gestión de tareas">
         <meta name="author" content="Reunai">
-        <meta property="og:title" content="Reunai | Transforma tus reuniones">
-        <meta property="og:description" content="Reunai es una herramienta que transforma tus reuniones en acciones concretas. Sube tus grabaciones y obtén resúmenes, análisis de sentimiento e insights conductuales.">
+        <meta property="og:title" content="{{ __('Reunai | Transform your meetings') }}">
+        <meta property="og:description" content="{{ __('Reunai is a tool that transforms your meetings into concrete actions. Upload your recordings and get summaries, sentiment analysis and behavioral insights.') }}">
         <meta property="og:image" content="{{ asset('logos/logo.png') }}">
         <meta property="og:url" content="https://www.Reunai.com">
         <meta property="og:type" content="website">
         <meta name="twitter:card" content="summary_large_image">
-        <meta name="twitter:title" content="Reunai | Transforma tus reuniones">
-        <meta name="twitter:description" content="Reunai es una herramienta que transforma tus reuniones en acciones concretas. Sube tus grabaciones y obtén resúmenes, análisis de sentimiento e insights conductuales.">
+        <meta name="twitter:title" content="{{ __('Reunai | Transform your meetings') }}">
+        <meta name="twitter:description" content="{{ __('Reunai is a tool that transforms your meetings into concrete actions. Upload your recordings and get summaries, sentiment analysis and behavioral insights.') }}">
         <meta name="twitter:image" content="{{ asset('logos/logo.png') }}">
         <!-- Scripts -->
-        <title>Reunai | Transforma tus reuniones</title>
+        <title>{{ __('Reunai | Transform your meetings') }}</title>
 
         <!-- Fonts -->
         <link rel="preconnect" href="https://fonts.bunny.net">
@@ -123,9 +123,9 @@
         
         <!-- Navigation with hover effects and indicator -->
         <nav class="hidden md:flex gap-8 font-medium">
-            <a href="#" class="relative nav-link py-2 px-1 active">Inicio</a>
-            <a href="#features" class="relative py-2 px-1 nav-link">Características</a>
-            <a href="#planes" class="relative py-2 px-1 nav-link">Planes</a>
+            <a href="#" class="relative nav-link py-2 px-1 active">{{ __('Home') }}</a>
+            <a href="#features" class="relative py-2 px-1 nav-link">{{ __('Features') }}</a>
+            <a href="#planes" class="relative py-2 px-1 nav-link">{{ __('Pricing') }}</a>
             <a href="#faq" class="relative py-2 px-1 nav-link">FAQ</a>
         </nav>
         
@@ -133,15 +133,15 @@
         <div class="hidden md:flex gap-4 items-center">
             @auth
             <a href="{{ route('dashboard') }}" class="text-sm group relative px-5 py-2.5 overflow-hidden rounded-lg bg-gradient-to-r from-orange-500 to-red-500 text-white shadow-md transition-all duration-300 hover:shadow-lg hover:shadow-orange-500/30 hover:-translate-y-0.5">
-                <span class="relative z-10 font-medium">Mi panel</span>
+                <span class="relative z-10 font-medium">{{ __('My Dashboard') }}</span>
                 <span class="absolute inset-0 bg-gradient-to-r from-orange-600 to-red-600 opacity-0 group-hover:opacity-100 transition-opacity duration-300"></span>
             </a>
             @else
             <a href="/login" class="text-sm text-gray-300 hover:text-white transition-colors duration-300 px-4 py-2">
-                Iniciar sesión
+                {{ __('Login') }}
             </a>
             <a href="/register" class="text-sm group relative px-5 py-2.5 overflow-hidden rounded-lg bg-gradient-to-r from-orange-500 to-red-500 text-white shadow-md transition-all duration-300 hover:shadow-lg hover:shadow-orange-500/30 hover:-translate-y-0.5">
-                <span class="relative z-10 font-medium">Regístrate</span>
+                <span class="relative z-10 font-medium">{{ __('Register') }}</span>
                 <span class="absolute inset-0 bg-gradient-to-r from-orange-600 to-red-600 opacity-0 group-hover:opacity-100 transition-opacity duration-300"></span>
             </a>
             @endauth
@@ -161,16 +161,16 @@
     <!-- Mobile menu (hidden by default) -->
     <div id="mobile-menu" class="md:hidden hidden bg-black/90 backdrop-blur-xl border-t border-gray-800">
         <nav class="flex flex-col py-6 px-6 space-y-4">
-            <a href="#" class="py-2 nav-link pl-4">Inicio</a>
-            <a href="#features" class="py-2 nav-link">Características</a>
-            <a href="#planes" class="py-2 nav-link">Planes</a>
+            <a href="#" class="py-2 nav-link pl-4">{{ __('Home') }}</a>
+            <a href="#features" class="py-2 nav-link">{{ __('Features') }}</a>
+            <a href="#planes" class="py-2 nav-link">{{ __('Pricing') }}</a>
             <a href="#faq" class="py-2 nav-link">FAQ</a>
             <div class="pt-4 flex flex-col space-y-3">
                 @auth
-                <a href="{{ route('dashboard') }}" class="text-center py-2 bg-gradient-to-r from-orange-500 to-red-500 text-white rounded-lg font-medium">Mi panel</a>
+                <a href="{{ route('dashboard') }}" class="text-center py-2 bg-gradient-to-r from-orange-500 to-red-500 text-white rounded-lg font-medium">{{ __('My Dashboard') }}</a>
                 @else
-                <a href="/login" class="text-center py-2 text-gray-300 hover:text-white border border-gray-700 rounded-lg hover:border-gray-500 transition-colors duration-300">Iniciar sesión</a>
-                <a href="/register" class="text-center py-2 bg-gradient-to-r from-orange-500 to-red-500 text-white rounded-lg font-medium">Regístrate</a>
+                <a href="/login" class="text-center py-2 text-gray-300 hover:text-white border border-gray-700 rounded-lg hover:border-gray-500 transition-colors duration-300">{{ __('Login') }}</a>
+                <a href="/register" class="text-center py-2 bg-gradient-to-r from-orange-500 to-red-500 text-white rounded-lg font-medium">{{ __('Register') }}</a>
                 @endauth
             </div>
         </nav>
@@ -189,25 +189,25 @@
     <div class="relative z-10 text-center max-w-5xl mx-auto">
         <div class="inline-flex items-center bg-gradient-to-r from-orange-500/30 to-red-500/30 px-4 py-2 rounded-full backdrop-blur-sm mb-6 border border-orange-500/20 shadow-lg">
             <span class="animate-pulse mr-2 h-2 w-2 bg-orange-500 rounded-full"></span>
-            <span class="text-orange-300 font-medium tracking-wider text-sm">IMPULSADO POR INTELIGENCIA ARTIFICIAL</span>
+            <span class="text-orange-300 font-medium tracking-wider text-sm">{{ __('POWERED BY ARTIFICIAL INTELLIGENCE') }}</span>
         </div>
-        
+
         <h1 class="text-5xl md:text-7xl font-extrabold mb-8 leading-tight bg-gradient-to-br from-white via-gray-100 to-gray-300 text-transparent bg-clip-text">
-            Transforma tus reuniones en <span class="bg-gradient-to-r from-orange-400 to-red-500 text-transparent bg-clip-text">acciones concretas</span>
+            {{ __('Transform your meetings into') }} <span class="bg-gradient-to-r from-orange-400 to-red-500 text-transparent bg-clip-text">{{ __('concrete actions') }}</span>
         </h1>
-        
+
         <p class="text-xl md:text-2xl text-gray-400 max-w-3xl mx-auto mb-12 leading-relaxed">
-            Reunai analiza tus conversaciones, genera resúmenes inteligentes y extrae las acciones clave para maximizar tu productividad.
+            {{ __('Reunai analyzes your conversations, generates intelligent summaries and extracts key actions to maximize your productivity.') }}
         </p>
-        
+
         <div class="flex flex-col sm:flex-row justify-center gap-6 mb-16">
             <a href="#planes" class="group relative overflow-hidden px-8 py-4 rounded-xl bg-gradient-to-r from-orange-500 to-red-500 font-bold text-lg shadow-xl shadow-orange-500/20 transform transition-all duration-300 hover:-translate-y-1 hover:shadow-orange-500/30">
-                <span class="relative z-10">Prueba gratis 14 días</span>
+                <span class="relative z-10">{{ __('Free 14-day trial') }}</span>
                 <div class="absolute inset-0 bg-gradient-to-r from-orange-600 to-red-600 transform scale-x-0 group-hover:scale-x-100 transition-transform origin-left duration-300"></div>
             </a>
             <a href="#demo" class="group relative px-8 py-4 rounded-xl bg-white/10 backdrop-blur-sm border border-white/20 font-bold text-lg transition-all duration-300 hover:bg-white/20 hover:-translate-y-1">
                 <span class="flex items-center">
-                    Ver demostración
+                    {{ __('View demo') }}
                     <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 ml-2 group-hover:translate-x-1 transition-transform" viewBox="0 0 20 20" fill="currentColor">
                         <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zM9.555 7.168A1 1 0 008 8v4a1 1 0 001.555.832l3-2a1 1 0 000-1.664l-3-2z" clip-rule="evenodd" />
                     </svg>
@@ -219,15 +219,15 @@
         <div class="flex flex-wrap justify-center gap-10 text-center mb-16">
             <div class="backdrop-blur-md bg-white/5 px-6 py-4 rounded-xl border border-white/10">
                 <span class="block text-3xl font-bold text-orange-400 mb-1">500+</span>
-                <span class="text-gray-400">Usuarios activos</span>
+                <span class="text-gray-400">{{ __('Active users') }}</span>
             </div>
             <div class="backdrop-blur-md bg-white/5 px-6 py-4 rounded-xl border border-white/10">
                 <span class="block text-3xl font-bold text-orange-400 mb-1">2K+</span>
-                <span class="text-gray-400">Reuniones analizadas</span>
+                <span class="text-gray-400">{{ __('Meetings analyzed') }}</span>
             </div>
             <div class="backdrop-blur-md bg-white/5 px-6 py-4 rounded-xl border border-white/10">
                 <span class="block text-3xl font-bold text-orange-400 mb-1">98%</span>
-                <span class="text-gray-400">Satisfacción</span>
+                <span class="text-gray-400">{{ __('Satisfaction') }}</span>
             </div>
         </div>
     </div>
@@ -238,15 +238,15 @@
     <div class="max-w-6xl mx-auto relative">
         <!-- Main app interface preview -->
         <div class="rounded-3xl shadow-2xl border border-gray-700/50 overflow-hidden bg-gradient-to-br from-gray-800/90 to-gray-900/90 backdrop-blur-xl transform transition-transform hover:scale-[1.01] duration-500">
-            <img src="/img/ui-preview.png" alt="Vista previa de la interfaz" class="w-full object-cover" onerror="this.src='https://placehold.co/1200x600/1f1f23/orange?text=Reunai+Interface'">
-        </div>       
-        
+            <img src="/img/ui-preview.png" alt="{{ __('Interface preview') }}" class="w-full object-cover" onerror="this.src='https://placehold.co/1200x600/1f1f23/orange?text=Reunai+Interface'">
+        </div>
+
         <div class="absolute -bottom-8 right-10 transform rotate-[3deg] bg-orange-500 rounded-lg shadow-xl p-3 w-48 hidden md:block">
             <div class="flex items-center gap-2 text-white">
                 <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
                     <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd" />
                 </svg>
-                <span class="text-sm font-medium">Tarea completada</span>
+                <span class="text-sm font-medium">{{ __('Task completed') }}</span>
             </div>
             <div class="mt-1">
                 <div class="h-2 bg-white/30 rounded-full w-full"></div>
@@ -258,9 +258,9 @@
   <!-- Features -->
 <section id="features" class="py-32 px-6 bg-gradient-to-b from-black/40 to-transparent relative">
     <div class="max-w-6xl mx-auto mb-16 text-center">
-        <div class="inline-block bg-orange-500/20 text-orange-300 px-3 py-1 rounded-full uppercase text-xs tracking-wider mb-6">Características</div>
-        <h2 class="text-4xl md:text-5xl font-bold mb-6">Todo lo que necesitas para <span class="text-orange-500">optimizar tus reuniones</span></h2>
-        <p class="text-gray-400 max-w-2xl mx-auto">Nuestras herramientas avanzadas transforman horas de conversación en acciones claras y concisas.</p>
+        <div class="inline-block bg-orange-500/20 text-orange-300 px-3 py-1 rounded-full uppercase text-xs tracking-wider mb-6">{{ __('Features') }}</div>
+        <h2 class="text-4xl md:text-5xl font-bold mb-6">{{ __('Everything you need to') }} <span class="text-orange-500">{{ __('optimize your meetings') }}</span></h2>
+        <p class="text-gray-400 max-w-2xl mx-auto">{{ __('Our advanced tools transform hours of conversation into clear and concise actions.') }}</p>
     </div>
     
     <div class="max-w-6xl mx-auto grid md:grid-cols-3 gap-8 lg:gap-12">
@@ -271,16 +271,16 @@
                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
                 </svg>
             </div>
-            <h3 class="text-2xl font-bold mb-4">Resumen automático</h3>
-            <p class="text-gray-400 mb-6">Transforma reuniones extensas en resúmenes concisos con puntos clave identificados por IA avanzada.</p>
+            <h3 class="text-2xl font-bold mb-4">{{ __('Automatic summary') }}</h3>
+            <p class="text-gray-400 mb-6">{{ __('Transform extensive meetings into concise summaries with key points identified by advanced AI.') }}</p>
             <ul class="text-sm text-gray-300 space-y-2">
                 <li class="flex items-start">
                     <span class="text-orange-500 mr-2">✓</span>
-                    Detección de temas principales
+                    {{ __('Main topic detection') }}
                 </li>
                 <li class="flex items-start">
                     <span class="text-orange-500 mr-2">✓</span>
-                    Organización jerárquica
+                    {{ __('Hierarchical organization') }}
                 </li>
             </ul>
         </div>
@@ -292,16 +292,16 @@
                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2" />
                 </svg>
             </div>
-            <h3 class="text-2xl font-bold mb-4">Tareas destacadas</h3>
-            <p class="text-gray-400 mb-6">Extracción inteligente de acciones con asignación automática y fechas límite sugeridas.</p>
+            <h3 class="text-2xl font-bold mb-4">{{ __('Featured tasks') }}</h3>
+            <p class="text-gray-400 mb-6">{{ __('Intelligent extraction of actions with automatic assignment and suggested deadlines.') }}</p>
             <ul class="text-sm text-gray-300 space-y-2">
                 <li class="flex items-start">
                     <span class="text-orange-500 mr-2">✓</span>
-                    Identificación de responsables
+                    {{ __('Identification of responsible parties') }}
                 </li>
                 <li class="flex items-start">
                     <span class="text-orange-500 mr-2">✓</span>
-                    Priorización automática
+                    {{ __('Automatic prioritization') }}
                 </li>
             </ul>
         </div>
@@ -313,16 +313,16 @@
                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 17h5l-1.405-1.405A2.032 2.032 0 0118 14.158V11a6.002 6.002 0 00-4-5.659V5a2 2 0 10-4 0v.341C7.67 6.165 6 8.388 6 11v3.159c0 .538-.214 1.055-.595 1.436L4 17h5m6 0v1a3 3 0 11-6 0v-1m6 0H9" />
                 </svg>
             </div>
-            <h3 class="text-2xl font-bold mb-4">Integraciones avanzadas</h3>
-            <p class="text-gray-400 mb-6">Conecta con tus herramientas favoritas para una gestión de tareas sin fricciones.</p>
+            <h3 class="text-2xl font-bold mb-4">{{ __('Advanced integrations') }}</h3>
+            <p class="text-gray-400 mb-6">{{ __('Connect with your favorite tools for frictionless task management.') }}</p>
             <ul class="text-sm text-gray-300 space-y-2">
                 <li class="flex items-start">
                     <span class="text-orange-500 mr-2">✓</span>
-                    Slack, Email, Notion
+                    {{ __('Slack, Email, Notion') }}
                 </li>
                 <li class="flex items-start">
                     <span class="text-orange-500 mr-2">✓</span>
-                    Calendar y recordatorios
+                    {{ __('Calendar and reminders') }}
                 </li>
             </ul>
         </div>

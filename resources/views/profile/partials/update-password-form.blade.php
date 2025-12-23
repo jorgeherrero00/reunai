@@ -3,7 +3,7 @@
     <header class="text-center">
         <div class="inline-flex items-center bg-gradient-to-r from-orange-500/30 to-blue-500/30 px-4 py-2 rounded-full backdrop-blur-sm mb-4 border border-orange-500/20 shadow-lg">
             <span class="animate-pulse mr-2 h-2 w-2 bg-orange-500 rounded-full"></span>
-            <span class="text-orange-300 font-medium tracking-wider text-xs uppercase">Seguridad</span>
+            <span class="text-orange-300 font-medium tracking-wider text-xs uppercase">{{ __('Security') }}</span>
         </div>
         
         <h2 class="text-3xl font-bold mb-4 bg-gradient-to-r from-white via-gray-100 to-gray-300 text-transparent bg-clip-text">
@@ -32,10 +32,10 @@
                     <x-text-input 
                         id="update_password_current_password" 
                         name="current_password" 
-                        type="password" 
-                        class="w-full bg-gray-700/50 border border-gray-600 rounded-lg py-3 px-4 text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-orange-500/50 focus:border-orange-500 transition-all" 
+                        type="password"
+                        class="w-full bg-gray-700/50 border border-gray-600 rounded-lg py-3 px-4 text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-orange-500/50 focus:border-orange-500 transition-all"
                         autocomplete="current-password"
-                        placeholder="Introduce tu contraseña actual"
+                        placeholder="{{ __('Enter your current password') }}"
                     />
                     <div class="absolute inset-y-0 right-0 flex items-center pr-3">
                         <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-gray-400 group-focus-within:text-orange-400 transition-colors" fill="none" viewBox="0 0 24 24" stroke="currentColor">
@@ -57,10 +57,10 @@
                     <x-text-input 
                         id="update_password_password" 
                         name="password" 
-                        type="password" 
-                        class="w-full bg-gray-700/50 border border-gray-600 rounded-lg py-3 px-4 text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-orange-500/50 focus:border-orange-500 transition-all" 
+                        type="password"
+                        class="w-full bg-gray-700/50 border border-gray-600 rounded-lg py-3 px-4 text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-orange-500/50 focus:border-orange-500 transition-all"
                         autocomplete="new-password"
-                        placeholder="Introduce tu nueva contraseña"
+                        placeholder="{{ __('Enter your new password') }}"
                     />
                     <div class="absolute inset-y-0 right-0 flex items-center pr-3">
                         <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-gray-400 group-focus-within:text-orange-400 transition-colors" fill="none" viewBox="0 0 24 24" stroke="currentColor">
@@ -78,7 +78,7 @@
                             <div class="h-full bg-gradient-to-r from-red-500 via-yellow-500 to-green-500 w-0 transition-all duration-300" id="password-strength-bar"></div>
                         </div>
                     </div>
-                    <p class="text-xs text-gray-400 mt-1">Usa al menos 8 caracteres con mayúsculas, minúsculas y números</p>
+                    <p class="text-xs text-gray-400 mt-1">{{ __('Use at least 8 characters with uppercase, lowercase and numbers') }}</p>
                 </div>
             </div>
 
@@ -93,10 +93,10 @@
                     <x-text-input 
                         id="update_password_password_confirmation" 
                         name="password_confirmation" 
-                        type="password" 
-                        class="w-full bg-gray-700/50 border border-gray-600 rounded-lg py-3 px-4 text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-orange-500/50 focus:border-orange-500 transition-all" 
+                        type="password"
+                        class="w-full bg-gray-700/50 border border-gray-600 rounded-lg py-3 px-4 text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-orange-500/50 focus:border-orange-500 transition-all"
                         autocomplete="new-password"
-                        placeholder="Confirma tu nueva contraseña"
+                        placeholder="{{ __('Confirm your new password') }}"
                     />
                     <div class="absolute inset-y-0 right-0 flex items-center pr-3">
                         <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-gray-400 group-focus-within:text-orange-400 transition-colors" fill="none" viewBox="0 0 24 24" stroke="currentColor">
@@ -148,24 +148,24 @@
             <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-2" viewBox="0 0 20 20" fill="currentColor">
                 <path fill-rule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7-4a1 1 0 11-2 0 1 1 0 012 0zM9 9a1 1 0 000 2v3a1 1 0 001 1h1a1 1 0 100-2v-3a1 1 0 00-1-1H9z" clip-rule="evenodd" />
             </svg>
-            Consejos de seguridad
+            {{ __('Security tips') }}
         </h3>
         <div class="grid md:grid-cols-2 gap-4 text-sm text-gray-400">
             <div class="flex items-start">
                 <span class="text-orange-400 mr-2 mt-0.5">•</span>
-                <span>Usa al menos 12 caracteres</span>
+                <span>{{ __('Use at least 12 characters') }}</span>
             </div>
             <div class="flex items-start">
                 <span class="text-orange-400 mr-2 mt-0.5">•</span>
-                <span>Combina mayúsculas y minúsculas</span>
+                <span>{{ __('Combine uppercase and lowercase') }}</span>
             </div>
             <div class="flex items-start">
                 <span class="text-orange-400 mr-2 mt-0.5">•</span>
-                <span>Incluye números y símbolos</span>
+                <span>{{ __('Include numbers and symbols') }}</span>
             </div>
             <div class="flex items-start">
                 <span class="text-orange-400 mr-2 mt-0.5">•</span>
-                <span>Evita información personal</span>
+                <span>{{ __('Avoid personal information') }}</span>
             </div>
         </div>
     </div>
