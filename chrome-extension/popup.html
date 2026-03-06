@@ -1,0 +1,277 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Meetlyze Recorder</title>
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+
+    body {
+      width: 360px;
+      min-height: 200px;
+      background: #0f0f13;
+      color: #e5e7eb;
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+      font-size: 14px;
+    }
+
+    /* Header */
+    .header {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      padding: 14px 16px 12px;
+      border-bottom: 1px solid #1f2937;
+      background: #0f0f13;
+    }
+    .header-logo {
+      width: 28px; height: 28px;
+      background: linear-gradient(135deg, #f97316, #ef4444);
+      border-radius: 8px;
+      display: flex; align-items: center; justify-content: center;
+      flex-shrink: 0;
+    }
+    .header-logo svg { width: 16px; height: 16px; fill: white; }
+    .header-title { font-weight: 700; font-size: 15px; color: white; }
+    .header-subtitle { font-size: 11px; color: #6b7280; }
+    .header-settings {
+      margin-left: auto;
+      background: none; border: none; cursor: pointer;
+      color: #6b7280; padding: 4px;
+      border-radius: 6px;
+      transition: color 0.2s, background 0.2s;
+    }
+    .header-settings:hover { color: #f97316; background: #1f2937; }
+
+    /* Views */
+    .view { display: none; padding: 20px 16px; }
+    .view.active { display: block; }
+
+    /* Setup view */
+    .setup-title {
+      font-size: 15px; font-weight: 600; color: white;
+      margin-bottom: 6px;
+    }
+    .setup-desc { color: #9ca3af; font-size: 12px; margin-bottom: 18px; line-height: 1.5; }
+    .form-group { margin-bottom: 14px; }
+    .form-label { display: block; font-size: 12px; color: #9ca3af; margin-bottom: 5px; }
+    .form-input {
+      width: 100%; padding: 9px 12px;
+      background: #1f2937; border: 1px solid #374151;
+      border-radius: 8px; color: white; font-size: 13px;
+      outline: none; transition: border-color 0.2s;
+    }
+    .form-input:focus { border-color: #f97316; }
+    .form-input::placeholder { color: #4b5563; }
+
+    /* Buttons */
+    .btn {
+      width: 100%; padding: 11px 16px;
+      border: none; border-radius: 10px; cursor: pointer;
+      font-size: 14px; font-weight: 600;
+      transition: all 0.2s; display: flex;
+      align-items: center; justify-content: center; gap: 8px;
+    }
+    .btn-primary {
+      background: linear-gradient(135deg, #f97316, #ef4444);
+      color: white;
+    }
+    .btn-primary:hover { opacity: 0.9; transform: translateY(-1px); }
+    .btn-stop {
+      background: #1f2937; border: 1px solid #ef4444;
+      color: #ef4444;
+    }
+    .btn-stop:hover { background: #ef444415; }
+    .btn-disabled {
+      background: #1f2937; color: #4b5563; cursor: not-allowed;
+    }
+    .btn svg { width: 16px; height: 16px; }
+
+    /* Not on Meet view */
+    .not-meet-icon {
+      width: 48px; height: 48px; margin: 0 auto 12px;
+      background: #1f2937; border-radius: 12px;
+      display: flex; align-items: center; justify-content: center;
+    }
+    .not-meet-icon svg { width: 24px; height: 24px; color: #6b7280; }
+    .not-meet-text { text-align: center; color: #9ca3af; font-size: 13px; line-height: 1.5; }
+    .not-meet-text strong { color: white; display: block; margin-bottom: 4px; font-size: 14px; }
+
+    /* Ready view */
+    .meeting-info {
+      background: #1a1d25; border: 1px solid #1f2937;
+      border-radius: 10px; padding: 12px 14px; margin-bottom: 16px;
+    }
+    .meeting-label { font-size: 11px; color: #6b7280; text-transform: uppercase; letter-spacing: 0.05em; }
+    .meeting-name { color: white; font-weight: 600; margin-top: 2px; word-break: break-word; }
+
+    /* Recording view */
+    .recording-badge {
+      display: flex; align-items: center; justify-content: center;
+      gap: 8px; margin-bottom: 16px;
+    }
+    .rec-dot {
+      width: 10px; height: 10px; border-radius: 50%;
+      background: #ef4444;
+      animation: pulse-dot 1.2s ease-in-out infinite;
+    }
+    .rec-label { color: #ef4444; font-weight: 600; font-size: 13px; text-transform: uppercase; letter-spacing: 0.05em; }
+    @keyframes pulse-dot {
+      0%, 100% { opacity: 1; transform: scale(1); }
+      50% { opacity: 0.5; transform: scale(0.85); }
+    }
+    .recording-timer {
+      text-align: center; font-size: 36px; font-weight: 700;
+      color: white; letter-spacing: 0.04em; margin-bottom: 8px;
+      font-variant-numeric: tabular-nums;
+    }
+    .recording-meeting {
+      text-align: center; color: #6b7280; font-size: 12px;
+      margin-bottom: 20px; white-space: nowrap;
+      overflow: hidden; text-overflow: ellipsis;
+    }
+
+    /* Uploading view */
+    .upload-icon {
+      width: 52px; height: 52px; margin: 0 auto 12px;
+      background: linear-gradient(135deg, #f97316, #ef4444);
+      border-radius: 50%; display: flex; align-items: center; justify-content: center;
+      animation: spin-slow 2s linear infinite;
+    }
+    .upload-icon svg { width: 26px; height: 26px; color: white; }
+    @keyframes spin-slow {
+      from { transform: rotate(0deg); }
+      to { transform: rotate(360deg); }
+    }
+    .upload-title { text-align: center; color: white; font-weight: 600; margin-bottom: 4px; }
+    .upload-desc { text-align: center; color: #9ca3af; font-size: 12px; margin-bottom: 14px; }
+    .progress-bar-wrap {
+      background: #1f2937; border-radius: 99px; height: 6px; overflow: hidden;
+    }
+    .progress-bar-fill {
+      height: 100%; background: linear-gradient(90deg, #f97316, #ef4444);
+      border-radius: 99px; transition: width 0.4s ease;
+      width: 0%;
+    }
+    .progress-percent { text-align: right; font-size: 11px; color: #6b7280; margin-top: 5px; }
+
+    /* Error view */
+    .error-box {
+      background: #1f1515; border: 1px solid #7f1d1d;
+      border-radius: 10px; padding: 12px 14px; color: #fca5a5;
+      font-size: 13px; margin-bottom: 14px; line-height: 1.5;
+    }
+
+    /* Separator */
+    .divider { height: 1px; background: #1f2937; margin: 16px 0; }
+
+    /* Link button */
+    .link-btn {
+      background: none; border: none; cursor: pointer;
+      color: #f97316; font-size: 12px; text-decoration: underline;
+      padding: 0;
+    }
+    .link-btn:hover { color: #fb923c; }
+  </style>
+</head>
+<body>
+
+  <!-- Header siempre visible -->
+  <div class="header">
+    <div class="header-logo">
+      <svg viewBox="0 0 24 24"><path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"/></svg>
+    </div>
+    <div>
+      <div class="header-title">Meetlyze</div>
+      <div class="header-subtitle">Google Meet Recorder</div>
+    </div>
+    <button class="header-settings" id="btnSettings" title="Ajustes">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="18" height="18">
+        <path d="M12 15a3 3 0 100-6 3 3 0 000 6z"/>
+        <path d="M19.4 15a1.65 1.65 0 00.33 1.82l.06.06a2 2 0 010 2.83 2 2 0 01-2.83 0l-.06-.06a1.65 1.65 0 00-1.82-.33 1.65 1.65 0 00-1 1.51V21a2 2 0 01-4 0v-.09A1.65 1.65 0 009 19.4a1.65 1.65 0 00-1.82.33l-.06.06a2 2 0 01-2.83-2.83l.06-.06A1.65 1.65 0 004.68 15a1.65 1.65 0 00-1.51-1H3a2 2 0 010-4h.09A1.65 1.65 0 004.6 9a1.65 1.65 0 00-.33-1.82l-.06-.06a2 2 0 012.83-2.83l.06.06A1.65 1.65 0 009 4.68a1.65 1.65 0 001-1.51V3a2 2 0 014 0v.09a1.65 1.65 0 001 1.51 1.65 1.65 0 001.82-.33l.06-.06a2 2 0 012.83 2.83l-.06.06A1.65 1.65 0 0019.4 9a1.65 1.65 0 001.51 1H21a2 2 0 010 4h-.09a1.65 1.65 0 00-1.51 1z"/>
+      </svg>
+    </button>
+  </div>
+
+  <!-- SETUP -->
+  <div class="view" id="view-setup">
+    <div class="setup-title">Configuración inicial</div>
+    <div class="setup-desc">Introduce tus credenciales para conectar la extensión con tu cuenta de Meetlyze.</div>
+    <div class="form-group">
+      <label class="form-label" for="inputUrl">URL de tu servidor</label>
+      <input class="form-input" id="inputUrl" type="url" placeholder="https://tudominio.com">
+    </div>
+    <div class="form-group">
+      <label class="form-label" for="inputToken">Token API</label>
+      <input class="form-input" id="inputToken" type="password" placeholder="Cópialo desde Integraciones">
+    </div>
+    <button class="btn btn-primary" id="btnSaveSetup">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 13l4 4L19 7"/></svg>
+      Guardar y conectar
+    </button>
+  </div>
+
+  <!-- NO ESTAMOS EN MEET -->
+  <div class="view" id="view-not-meet">
+    <div class="not-meet-icon">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+        <path stroke-linecap="round" stroke-linejoin="round" d="M15.75 10.5l4.72-4.72a.75.75 0 011.28.53v11.38a.75.75 0 01-1.28.53l-4.72-4.72M4.5 18.75h9a2.25 2.25 0 002.25-2.25v-9a2.25 2.25 0 00-2.25-2.25h-9A2.25 2.25 0 002.25 7.5v9a2.25 2.25 0 002.25 2.25z"/>
+      </svg>
+    </div>
+    <div class="not-meet-text">
+      <strong>Abre Google Meet</strong>
+      Esta extensión solo funciona dentro de una reunión activa en meet.google.com
+    </div>
+  </div>
+
+  <!-- LISTO PARA GRABAR -->
+  <div class="view" id="view-ready">
+    <div class="meeting-info">
+      <div class="meeting-label">Reunión detectada</div>
+      <div class="meeting-name" id="readyMeetingName">Cargando...</div>
+    </div>
+    <button class="btn btn-primary" id="btnStartRecording">
+      <svg viewBox="0 0 24 24" fill="currentColor"><circle cx="12" cy="12" r="8"/></svg>
+      Iniciar grabación
+    </button>
+  </div>
+
+  <!-- GRABANDO -->
+  <div class="view" id="view-recording">
+    <div class="recording-badge">
+      <div class="rec-dot"></div>
+      <span class="rec-label">Grabando</span>
+    </div>
+    <div class="recording-timer" id="timerDisplay">00:00:00</div>
+    <div class="recording-meeting" id="recordingMeetingName"></div>
+    <button class="btn btn-stop" id="btnStopRecording">
+      <svg viewBox="0 0 24 24" fill="currentColor"><rect x="6" y="6" width="12" height="12" rx="2"/></svg>
+      Detener y subir
+    </button>
+  </div>
+
+  <!-- SUBIENDO -->
+  <div class="view" id="view-uploading">
+    <div class="upload-icon">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+        <path stroke-linecap="round" stroke-linejoin="round" d="M3 16.5v2.25A2.25 2.25 0 005.25 21h13.5A2.25 2.25 0 0021 18.75V16.5m-13.5-9L12 3m0 0l4.5 4.5M12 3v13.5"/>
+      </svg>
+    </div>
+    <div class="upload-title">Subiendo grabación...</div>
+    <div class="upload-desc">No cierres el navegador hasta que finalice.</div>
+    <div class="progress-bar-wrap">
+      <div class="progress-bar-fill" id="progressFill"></div>
+    </div>
+    <div class="progress-percent" id="progressPercent">0%</div>
+  </div>
+
+  <!-- ERROR -->
+  <div class="view" id="view-error">
+    <div class="error-box" id="errorMessage"></div>
+    <button class="btn btn-primary" id="btnRetry">Reintentar</button>
+  </div>
+
+  <script src="popup.js"></script>
+</body>
+</html>

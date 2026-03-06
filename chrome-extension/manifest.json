@@ -1,0 +1,32 @@
+{
+  "manifest_version": 3,
+  "name": "Meetlyze Recorder",
+  "version": "1.0.0",
+  "description": "Graba tus reuniones de Google Meet y obtén resúmenes con IA automáticamente.",
+  "permissions": [
+    "tabCapture",
+    "storage",
+    "offscreen",
+    "activeTab",
+    "notifications",
+    "tabs"
+  ],
+  "host_permissions": [
+    "https://meet.google.com/*"
+  ],
+  "background": {
+    "service_worker": "background.js"
+  },
+  "content_scripts": [
+    {
+      "matches": ["https://meet.google.com/*"],
+      "js": ["content.js"],
+      "run_at": "document_idle"
+    }
+  ],
+  "action": {
+    "default_popup": "popup.html",
+    "default_title": "Meetlyze Recorder"
+  },
+  "minimum_chrome_version": "109"
+}
