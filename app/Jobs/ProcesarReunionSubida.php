@@ -116,21 +116,117 @@ class ProcesarReunionSubida implements ShouldQueue
     {
         Log::info('🧠 Transcribiendo audio con Whisper');
 
+        $fileSizeMB = filesize($audioPath) / 1024 / 1024;
+        Log::info('📦 Tamaño del archivo de audio', ['mb' => round($fileSizeMB, 2)]);
+
+        // Whisper API tiene un límite de 25MB por archivo
+        // Para reuniones largas, dividimos en chunks de ~10 minutos
+        if ($fileSizeMB > 24) {
+            Log::info('⚠️ Archivo grande detectado, dividiendo en chunks para Whisper');
+            return $this->transcribirAudioEnChunks($audioPath);
+        }
+
+        return $this->transcribirChunk($audioPath, basename($audioPath));
+    }
+
+    private function transcribirAudioEnChunks($audioPath)
+    {
+        // Obtener duración total del audio con ffprobe
+        $durationProcess = new \Symfony\Component\Process\Process([
+            'ffprobe',
+            '-v', 'error',
+            '-show_entries', 'format=duration',
+            '-of', 'default=noprint_wrappers=1:nokey=1',
+            $audioPath,
+        ]);
+        $durationProcess->run();
+
+        if (!$durationProcess->isSuccessful()) {
+            throw new \Exception('No se pudo obtener la duración del audio: ' . $durationProcess->getErrorOutput());
+        }
+
+        $totalSeconds = (int) floatval(trim($durationProcess->getOutput()));
+        $chunkSeconds = 600; // 10 minutos por chunk
+        $transcripciones = [];
+        $chunkDir = sys_get_temp_dir() . '/reunai_chunks_' . $this->meeting->id;
+
+        if (!is_dir($chunkDir)) {
+            mkdir($chunkDir, 0755, true);
+        }
+
+        try {
+            $chunkIndex = 0;
+            for ($start = 0; $start < $totalSeconds; $start += $chunkSeconds) {
+                $chunkPath = $chunkDir . '/chunk_' . $chunkIndex . '.mp3';
+                $duration = min($chunkSeconds, $totalSeconds - $start);
+
+                Log::info("🔪 Generando chunk {$chunkIndex}", [
+                    'start' => $start,
+                    'duration' => $duration,
+                    'path' => $chunkPath,
+                ]);
+
+                $splitProcess = new \Symfony\Component\Process\Process([
+                    'ffmpeg', '-y',
+                    '-i', $audioPath,
+                    '-ss', (string) $start,
+                    '-t', (string) $duration,
+                    '-vn',
+                    '-ar', '16000',  // 16kHz suficiente para Whisper y reduce tamaño
+                    '-ac', '1',      // mono
+                    '-b:a', '32k',   // bitrate bajo para minimizar tamaño
+                    $chunkPath,
+                ]);
+                $splitProcess->setTimeout(120);
+                $splitProcess->run();
+
+                if (!$splitProcess->isSuccessful()) {
+                    throw new \Symfony\Component\Process\Exception\ProcessFailedException($splitProcess);
+                }
+
+                $chunkSizeMB = filesize($chunkPath) / 1024 / 1024;
+                Log::info("📦 Chunk {$chunkIndex} generado", ['mb' => round($chunkSizeMB, 2)]);
+
+                $transcripciones[] = $this->transcribirChunk($chunkPath, "chunk_{$chunkIndex}.mp3");
+                $chunkIndex++;
+
+                // Pequeña pausa para no saturar la API
+                if ($start + $chunkSeconds < $totalSeconds) {
+                    usleep(500000); // 0.5s
+                }
+            }
+        } finally {
+            // Limpiar chunks temporales
+            $files = glob($chunkDir . '/*.mp3');
+            foreach ($files as $file) {
+                @unlink($file);
+            }
+            @rmdir($chunkDir);
+        }
+
+        $transcripcionCompleta = implode(' ', array_filter($transcripciones));
+        Log::info('📝 Transcripción completa (chunks)', [
+            'chunks' => count($transcripciones),
+            'length' => strlen($transcripcionCompleta),
+        ]);
+
+        return $transcripcionCompleta;
+    }
+
+    private function transcribirChunk($audioPath, $filename)
+    {
         $response = Http::timeout(300)
-            ->attach('file', fopen($audioPath, 'r'), basename($audioPath))
+            ->attach('file', fopen($audioPath, 'r'), $filename)
             ->withToken(config('services.openai.key'))
             ->post('https://api.openai.com/v1/audio/transcriptions', [
                 'model' => 'whisper-1',
             ]);
 
         if (!$response->successful()) {
-            throw new \Exception('Error en transcripción: ' . $response->body());
+            throw new \Exception('Error en transcripción de chunk: ' . $response->body());
         }
 
-        $transcripcion = $response->json()['text'] ?? '';
-        Log::info('📝 Transcripción completada', ['length' => strlen($transcripcion)]);
-        
-        return $transcripcion;
+        return $response->json()['text'] ?? '';
     }
 
     private function generarResumenYTareas($transcripcion)

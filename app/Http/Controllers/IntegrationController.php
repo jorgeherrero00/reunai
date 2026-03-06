@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Http;
+use Illuminate\Support\Str;
 use App\Models\UserIntegration;
 
 class IntegrationController extends Controller
@@ -157,6 +158,18 @@ class IntegrationController extends Controller
         ]);
 
         return redirect()->route('integrations.index')->with('success', 'Base de datos de Notion configurada correctamente.');
+    }
+
+    /**
+     * Generar o regenerar el token API del usuario (para extensión Chrome / Google Meet)
+     */
+    public function regenerateApiToken()
+    {
+        $token = Str::random(60);
+        auth()->user()->update(['api_token' => $token]);
+
+        return redirect()->route('integrations.index')
+            ->with('success', 'Token API generado correctamente. Cópialo y configúralo en tu extensión de Chrome.');
     }
 
     /**
