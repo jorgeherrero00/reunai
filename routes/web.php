@@ -47,6 +47,9 @@ Route::middleware(['auth'])->group(function () {
     Route::get('/integrations/notion/databases', [IntegrationController::class, 'listNotionDatabases'])->name('integrations.notion.databases');
     Route::post('/integrations/notion/databases/save', [IntegrationController::class, 'saveNotionDatabase'])->name('integrations.notion.database.save');
 
+    // API Token para extensión Chrome / Google Meet
+    Route::post('/api-token/regenerate', [IntegrationController::class, 'regenerateApiToken'])->name('api-token.regenerate');
+
     // Test integrations
     Route::post('/test/notion', [App\Http\Controllers\TestIntegrationController::class, 'testNotion'])->name('test.notion');
     Route::post('/test/slack', [App\Http\Controllers\TestIntegrationController::class, 'testSlack'])->name('test.slack');
